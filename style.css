@@ -58,3 +58,12 @@ th {
 td {
   text-align: center;
 }
+.delete {
+  padding: 0px;
+  width: 30px;
+  height: 30px;
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
