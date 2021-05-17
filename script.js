@@ -2,15 +2,18 @@
 
 const bookList = document.querySelector(".bookList");
 const bookForm = document.querySelector(".bookForm");
+const container = document.querySelector(".container");
 
-//Classe
+//Classes
 class Book {
   constructor(title, author, year) {
     this.title = title;
     this.author = author;
     this.year = year;
   }
-  //Méthodes
+  ///Méthodes///
+
+  //Ajout
   addBookToList(book) {
     const row = document.createElement("tr");
 
@@ -22,11 +25,36 @@ class Book {
 
     bookList.appendChild(row);
   }
+  //Remise à zéro
+  clearFiedls() {
+    document.getElementById("title").value = "";
+    document.getElementById("author").value = "";
+    document.getElementById("year").value = "";
+  }
+  //Message
+  showAlert(message, className) {
+    const alert = document.createElement("div");
+    alert.className = `alert ${className}`;
+    alert.appendChild(document.createTextNode(message));
+    container.insertBefore(alert, bookForm);
+
+    setTimeout(() => {
+      document.querySelector(".alert").remove();
+    }, 2500);
+  }
 }
 
-// Événement
+class Interface {
+  deleteBook(target) {
+    if (target.className === "delete") {
+      target.parentElement.parentElement.remove();
+    }
+  }
+}
+
+// Événement : enregistrer livre
 bookForm.addEventListener("submit", (e) => {
-  //On souhaite traité en local
+  //On souhaite traiter en local
   e.preventDefault();
 
   const title = document.getElementById("title").value;
@@ -34,6 +62,20 @@ bookForm.addEventListener("submit", (e) => {
   const year = document.getElementById("year").value;
 
   const book = new Book(title, author, year);
-  console.log(title);
-  book.addBookToList(book);
+
+  //Vérification des champs
+  if (title === "" || author === "" || year === "") {
+    book.showAlert("Remplissez tout les champs!", "error");
+  } else {
+    book.addBookToList(book);
+
+    book.clearFiedls();
+    book.showAlert("Livre ajouté!", "success");
+  }
+});
+
+// Événement : supprimer livre
+bookList.addEventListener("click", (e) => {
+  const ui = new Interface();
+  ui.deleteBook(e.target);
 });
