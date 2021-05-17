@@ -5,10 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>RetourneLaPhrase</title>
+    <link href="style.css" type="text/css" rel="stylesheet" />
   </head>
   <body>
     <div class="container">
+      <!-- Titre Principal -->
       <h1>Ajoutez un livre !</h1>
+
+      <!-- Formulaire -->
+      <form class="bookForm" method="POST">
+        <!-- Titre du livre -->
+        <div class="inputs">
+          <label for="title">Titre</label>
+          <input type="text" id="title" required />
+        </div>
+        <!-- Auteur du livre -->
+        <div class="inputs">
+          <label for="author">Auteur</label>
+          <input type="text" id="author" />
+        </div>
+        <!-- Publication du livre -->
+        <div class="inputs">
+          <label for="year">Année</label>
+          <input type="text" id="year" />
+        </div>
+      </form>
+      <!-- Boutton -->
+      <button type="submit">Envoyer</button>
     </div>
 
     <script src="script.js"></script>
